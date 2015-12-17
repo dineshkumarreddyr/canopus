@@ -16,8 +16,85 @@
 
         function activate() {
             verifyCookies();
+            addGridOptions();
         };
         activate();
+
+        function addGridOptions() {
+            //Grid Options
+            /* PRODUCTS GRID */
+            vm.productgridOptions = {
+                enableSorting: true,
+                enableFiltering: true,
+                enableColumnResizing: true,
+                onRegisterApi: function (gridApi) {
+                    vm.gridApi = gridApi;
+                },
+                columnDefs: [
+                    { name: 'transactionId', minWidth: 130, width: 180, field: 'txid', enableColumnResizing: true, enablePinning: true },
+                    { name: 'product', field: 'pname', minWidth: 130, width: 180 },
+                    { name: 'organizationName', field: 'orgname', minWidth: 150, width: 200 },
+                    {
+                        name: 'customer', cellTemplate: '<div data-ng-if=row.entity.guest=="true" class="ui-grid-cell-contents">{{row.entity.gname}}</div>' +
+                          '<div data-ng-if=row.entity.guest=="false" class="ui-grid-cell-contents">{{row.entity.uname}}</div>', minWidth: 130, width: 180
+                    },
+                    { name: 'paymentStatus', field: 'paymentstatus' },
+                    { name: 'bookDate', field: 'bookingdate' },
+                    { name: 'bookSession', field: 'bookingsession', enableFiltering: false },
+                ],
+                expandableRowTemplate: 'app/main/productexpand.html',
+                expandableRowHeight: 300
+            }
+
+            //Astrology Bookings
+            vm.astrobookingsOptions = {
+                enableSorting: true,
+                enableFiltering: true,
+                enableColumnResizing: true,
+                onRegisterApi: function (gridApi) {
+                    vm.agridApi = gridApi;
+                },
+                columnDefs: [
+                    { name: 'customerName', field: 'name', enablePinning: true,width:180 },
+                    { name: 'customerEmail', field: 'emailaddress', width: 180 },
+                    { name: 'customerNumber', field: 'number', width: 180 },
+                    { name: 'bookedOn', cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.createddate | date:"dd-MMM-yyyy hh:mm:ss"}}</div>', width: 180 },
+                    { name: 'astrologer', field: 'orgname', width: 180 },
+                    { name: 'astrologerEmail', field: 'email', width: 180 },
+                    { name: 'astrologerNumber(P)', field: 'privatenumber', width: 180 },
+                    { name: 'astrologerNumber(Pub)', field: 'publicnumber', width: 180 },
+                    {
+                        name: 'astrologerAddress', cellTemplate: '<div class="ui-grid-cell-contents">' +
+                          '{{row.entity.address}},{{row.entity.landmark}}</div>', width: 600
+                    },
+                ]
+            }
+
+            //Yoga Bookings
+            vm.yogabookingsOptions = {
+                enableSorting: true,
+                enableFiltering: true,
+                enableColumnResizing: true,
+                onRegisterApi: function (gridApi) {
+                    vm.ygridApi = gridApi;
+                },
+                columnDefs: [
+                    { name: 'customerName', field: 'name', enablePinning: true, width: 180 },
+                    { name: 'customerEmail', field: 'emailaddress', width: 180 },
+                    { name: 'customerNumber', field: 'number', width: 180 },
+                    { name: 'bookedOn', cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.createddate | date:"dd-MMM-yyyy hh:mm:ss"}}</div>', width: 180 },
+                    { name: 'trainer', field: 'orgname', width: 180 },
+                    { name: 'trainerEmail', field: 'email', width: 180 },
+                    { name: 'trainerNumber(P)', field: 'privatenumber', width: 180 },
+                    { name: 'trainerNumber(Pub)', field: 'publicnumber', width: 180 },
+                    {
+                        name: 'trainerAddress', cellTemplate: '<div class="ui-grid-cell-contents">' +
+                          '{{row.entity.address}},{{row.entity.landmark}}</div>', width: 600
+                    },
+                ]
+            }
+
+        };
 
         function init() {
             this.GuestAccouts = function () {
@@ -44,6 +121,8 @@
                         vm.transactions = response.records;
 
                         TransactionChart();
+                        //Adding data to product grid options
+                        vm.productgridOptions.data = vm.transactions;
                     }
                 }, function (response) {
                     $log.error(response);
@@ -53,6 +132,8 @@
                 $appservice.GetYogaBookings($appservice.GetCookie('accesstoken')).then(function (response) {
                     if (response != undefined && response.status != undefined && response.status.indexOf("success") > -1) {
                         vm.yogabookings = response.records;
+
+                        vm.yogabookingsOptions.data = vm.yogabookings;
                     }
                 }, function (response) {
                     $log.error(response);
@@ -62,6 +143,8 @@
                 $appservice.GetAstrologyBookings($appservice.GetCookie('accesstoken')).then(function (response) {
                     if (response != undefined && response.status != undefined && response.status.indexOf("success") > -1) {
                         vm.astrologybookings = response.records;
+
+                        vm.astrobookingsOptions.data = vm.astrologybookings;
                     }
                 }, function (response) {
                     $log.error(response);

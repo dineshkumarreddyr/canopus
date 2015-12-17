@@ -5581,3 +5581,8 @@ table.text-center th {
             white-space: normal !important;
         }
 }
+
+.trn-details{border-right:1px solid #ddd;}
+.trn-details h3{color:#333;font-weight:600;font-size:14px;}
+.trn-details p strong{color:#666;}
+.trn-details p{color:#666;font-size:12px;}

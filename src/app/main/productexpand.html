@@ -1,0 +1,49 @@
+﻿<!--
+    <div>{{row.entity.gatewayreferenceid}}</div>
+-->
+
+<div class="clearfix">
+    <div class="col-md-4 trn-details">
+        <h3>Astrologer Details</h3>
+        <p><strong>Cosmic#</strong>: {{row.entity.cosmicid}}</p>
+        <p><strong>Organization name</strong>: {{row.entity.orgname}}</p>
+        <p><strong>Email</strong>: {{row.entity.email}}</p>
+        <p><strong>Website</strong>: {{row.entity.website}}</p>
+        <p><strong>Address</strong>: {{row.entity.address}},{{row.entity.landmark}},{{row.entity.city}},{{row.entity.state}},{{row.entity.country}} - {{row.entity.pincode}}</p>
+        <p><strong>Phone (P)</strong>: {{row.entity.privatenumber}}</p>
+    </div>
+
+    <div data-ng-if="row.entity.guest=='true'" class="col-md-4 trn-details">
+        <h3>Customer Details</h3>
+        <p><strong>Guest</strong>: {{row.entity.guest}}</p>
+        <p><strong>Name</strong>: {{row.entity.gname}}</p>
+        <p><strong>Mobile</strong>: {{row.entity.gnumber}}</p>
+        <p><strong>eMail</strong>: {{row.entity.gemailaddress}}</p>
+        <p><strong>Date Of Birth</strong>: {{row.entity.gdob}}</p>
+        <p><strong>Time Of Birth</strong>: {{row.entity.gtob}}</p>
+        <p><strong>Place Of Birth</strong>: {{row.entity.gpob}}</p>
+    </div>
+
+    <div data-ng-if="row.entity.guest=='false'" class="col-md-4 trn-details">
+        <h3>Customer Details</h3>
+        <p><strong>Guest</strong>: {{row.entity.guest}}</p>
+        <p><strong>Name</strong>: {{row.entity.uname}}</p>
+        <p><strong>Mobile</strong>: {{row.entity.unumber}}</p>
+        <p><strong>eMail</strong>: {{row.entity.uemailaddress}}</p>
+        <p><strong>Date Of Birth</strong>: {{row.entity.udob}}</p>
+        <p><strong>Time Of Birth</strong>: {{row.entity.utob}}</p>
+        <p><strong>Place Of Birth</strong>: {{row.entity.upob}}</p>
+    </div>
+
+    <div class="col-md-4 trn-details">
+        <h3>Payment Details</h3>
+        <p><strong>Gateway Ref.#</strong>: {{row.entity.gatewayreferenceid}}</p>
+        <p><strong>Gateway Name</strong>: {{row.entity.gatewayname}}</p>
+        <p><strong>Gateway Name</strong>: {{row.entity.bankreferenceid}}</p>
+        <p><strong>Actual amount</strong>: {{row.entity.price}}</p>
+        <p><strong>Amount Paid</strong>: Rs. {{row.entity.amount}}</p>
+        <p><strong>Payment Mode</strong>: {{row.entity.pmode}}</p>
+        <p><strong>Card Name</strong>: {{row.entity.cname}}</p>
+        <p><strong>Session Time</strong>: {{row.entity.sessiontime}}</p>
+    </div>
+</div>

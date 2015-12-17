@@ -7,7 +7,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                
+
             </div>
         </div>
         <!-- search form -->
@@ -146,45 +146,14 @@
                 <div class="box box-info">
                     <div class="box-header with-border">
                         <h3 class="box-title">Latest Products Sold</h3>
-                        <!--<div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                        </div>-->
+                        <div class="box-tools pull-right">
+                            <span class="label label-danger">{{vm.transactions.length}} Bookings</span>
+                            <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>-->
+                        </div>
                     </div><!-- /.box-header -->
-                    <div class="box-body">
-                        <div class="table-responsive">
-                            <table class="table no-margin">
-                                <thead>
-                                    <tr>
-                                        <th>Transaction ID</th>
-                                        <th>Product</th>
-                                        <th>Organization Name</th>
-                                        <th>Book Date</th>
-                                        <th>Book Time</th>
-                                        <th>User Name</th>
-                                        <th>User Number</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr data-ng-repeat="item in vm.transactions | limitTo:10">
-                                        <td>{{item.txid}}</td>
-                                        <td>{{item.pname}}</td>
-                                        <td>{{item.orgname}}</td>
-                                        <td>{{item.bookingdate}}</td>
-                                        <td>{{item.session}}</td>
-                                        <td data-ng-if="item.guest=='true'">{{item.gname}}</td>
-                                        <td data-ng-if="item.guest=='true'">{{item.gnumber}}</td>
-                                        <td data-ng-if="item.guest=='false'">{{item.uname}}</td>
-                                        <td data-ng-if="item.guest=='false'">{{item.unumber}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div><!-- /.table-responsive -->
-                    </div><!-- /.box-body -->
-                    <div class="box-footer clearfix">
-                        <!--<a href="javascript::;" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>-->
-                        <a href="javascript::;" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
-                    </div><!-- /.box-footer -->
+                    <!--PRODUCT GRID STARTS-->
+                    <div id="productsgrid" ui-grid-pinning ui-grid-expandable class="grid" ui-grid="vm.productgridOptions"></div>
                 </div><!-- /.box -->
                 <div class="row">
                     <div class="col-md-6">
@@ -199,36 +168,8 @@
                                 </div>
                             </div><!-- /.box-header -->
                             <div class="box-body no-padding">
-                                <div class="table-responsive">
-                                    <table class="table no-margin">
-                                        <thead>
-                                            <tr>
-                                                <th>User Name</th>
-                                                <th>Email Address</th>
-                                                <th>Number</th>
-                                                <th>Book Date &amp; Time</th>
-                                                <th>Astrologer</th>
-                                                <th>Astrologer Number</th>
-                                                <th>Astrologer Address</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr data-ng-repeat="item in vm.astrologybookings | limitTo:5">
-                                                <td>{{item.name}}</td>
-                                                <td>{{item.emailaddress}}</td>
-                                                <td>{{item.number}}</td>
-                                                <td>{{item.createddate | date:'dd-MMM-yyyy hh:mm:ss'}}</td>
-                                                <td>{{item.orgname}}</td>
-                                                <td>{{item.privatenumber}}</td>
-                                                <td>{{item.address}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div><!-- /.table-responsive -->
+                                <div id="astrobookingsgrid" ui-grid-pinning class="grid" ui-grid="vm.astrobookingsOptions"></div>
                             </div><!-- /.box-body -->
-                            <div class="box-footer text-center">
-                                <a href="javascript::" class="uppercase">View All Bookings</a>
-                            </div><!-- /.box-footer -->
                         </div><!--/.direct-chat -->
                     </div><!-- /.col -->
                     <div class="col-md-6">
@@ -241,34 +182,8 @@
                                 </div>
                             </div><!-- /.box-header -->
                             <div class="box-body no-padding">
-                                <table class="table no-margin">
-                                    <thead>
-                                        <tr>
-                                            <th>User Name</th>
-                                            <th>Email Address</th>
-                                            <th>Number</th>
-                                            <th>Book Date &amp; Time</th>
-                                            <th>Yoga Trainer</th>
-                                            <th>Trainer Number</th>
-                                            <th>Trainer Address</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr data-ng-repeat="item in vm.yogabookings | limitTo:5">
-                                            <td>{{item.name}}</td>
-                                            <td>{{item.emailaddress}}</td>
-                                            <td>{{item.number}}</td>
-                                            <td>{{item.createddate | date:'dd-MMM-yyyy hh:mm:ss'}}</td>
-                                            <td>{{item.orgname}}</td>
-                                            <td>{{item.privatenumber}}</td>
-                                            <td>{{item.address}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div id="yogabookings" ui-grid-pinning class="grid" ui-grid="vm.yogabookingsOptions"></div>
                             </div><!-- /.box-body -->
-                            <div class="box-footer text-center">
-                                <a href="javascript::" class="uppercase">View All Bookings</a>
-                            </div><!-- /.box-footer -->
                         </div><!--/.box -->
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -308,7 +223,7 @@
                                     <td>{{item.pob}}</td>
                                     <td>
                                         <div data-ng-if="!item.photo">
-                                            <img width="100" height="100" class="img-circle" data-ng-src="{{item.photo}}" alt="User Photo" />
+                                            <img width="100" height="100" class="img-circle" data-ng-src="{{item.photo}}" alt="No Photo" />
                                         </div>
                                     </td>
                                     <td>{{item.createddate | date:'dd-MMM-yyyy hh:mm a'}}</td>
@@ -356,7 +271,7 @@
                                     <td>{{item.pob}}</td>
                                     <td>
                                         <div data-ng-if="!item.photo">
-                                            <img width="100" height="100" class="img-circle" data-ng-src="{{item.photo}}" alt="User Photo" />
+                                            <img width="100" height="100" class="img-circle" data-ng-src="{{item.photo}}" alt="No Photo" />
                                         </div>
                                     </td>
                                     <td></td>
