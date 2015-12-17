@@ -124,7 +124,7 @@
                             }
 
                             //WeekRevenue
-                            vm.weekRevenue += v.price;
+                            vm.weekRevenue += v.amount;
                         });
                     }
 
