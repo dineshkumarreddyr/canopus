@@ -92,7 +92,7 @@
                     vm.weekRevenue = 0;
                     var data = [0, 0, 0, 0, 0, 0, 0];
                     var rangeData = _.filter(vm.transactions, function (v) {
-                        return (moment(v.createddate) <= moment().startOf('isoweek'));// && (moment(v.createddate) <= moment().endOf('isoweek'));
+                        return (moment(v.createddate) >= moment().startOf('isoweek')) && (moment(v.createddate) <= moment().endOf('isoweek'));
                     });
                     //TOTAL PRODUCTS SOLD
                     vm.totalProducts = rangeData.length;
