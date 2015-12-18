@@ -55,7 +55,7 @@
                     vm.agridApi = gridApi;
                 },
                 columnDefs: [
-                    { name: 'customerName', field: 'name', enablePinning: true,width:180 },
+                    { name: 'customerName', field: 'name', enablePinning: true, width: 180 },
                     { name: 'customerEmail', field: 'emailaddress', width: 180 },
                     { name: 'customerNumber', field: 'number', width: 180 },
                     { name: 'bookedOn', cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.createddate | date:"dd-MMM-yyyy hh:mm:ss"}}</div>', width: 180 },
@@ -94,6 +94,44 @@
                 ]
             }
 
+            //User Accounts
+            vm.useraccountsOptions = {
+                enableSorting: true,
+                enableFiltering: true,
+                enableColumnResizing: true,
+                onRegisterApi: function (gridApi) {
+                    vm.ugridApi = gridApi;
+                },
+                columnDefs: [
+                    { name: 'cosmicId', cellTemplate:'<div class="ui-grid-cell-contents">COU{{row.entity.userid}}</div>' },
+                    { name: 'username', field: 'name', width: 180 },
+                    { name: 'mobileNumber', field: 'number' },
+                    { name: 'emailAddress', field: 'emailaddress' },
+                    { name: 'dateOfBirth', field: 'dob' },
+                    { name: 'timeOfBirth', field: 'tob' },
+                    { name: 'placeOfBirth', field: 'pob' }
+                ]
+            }
+
+            //Guest Accounts
+            vm.guestaccountsOptions = {
+                enableSorting: true,
+                enableFiltering: true,
+                enableColumnResizing: true,
+                onRegisterApi: function (gridApi) {
+                    vm.guestgridApi = gridApi;
+                },
+                columnDefs: [
+                    { name: 'cosmicId', cellTemplate: '<div class="ui-grid-cell-contents">COG{{row.entity.guestid}}</div>' },
+                    { name: 'username', field: 'name', width: 180 },
+                    { name: 'mobileNumber', field: 'number' },
+                    { name: 'emailAddress', field: 'emailaddress' },
+                    { name: 'dateOfBirth', field: 'dob' },
+                    { name: 'timeOfBirth', field: 'tob' },
+                    { name: 'placeOfBirth', field: 'pob' }
+                ]
+            }
+
         };
 
         function init() {
@@ -101,6 +139,8 @@
                 $appservice.GetGuestAccounts($appservice.GetCookie('accesstoken')).then(function (response) {
                     if (response != undefined && response.status != undefined && response.status.indexOf("success") > -1) {
                         vm.guestaccounts = response.records;
+
+                        vm.guestaccountsOptions.data = vm.guestaccounts;
                     }
                 }, function (response) {
                     $log.error(response);
@@ -110,6 +150,8 @@
                 $appservice.GetUserAccounts($appservice.GetCookie('accesstoken')).then(function (response) {
                     if (response != undefined && response.status != undefined && response.status.indexOf("success") > -1) {
                         vm.useraccounts = response.records;
+
+                        vm.useraccountsOptions.data = vm.useraccounts;
                     }
                 }, function (response) {
                     $log.error(response);
